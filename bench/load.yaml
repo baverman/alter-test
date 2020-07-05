@@ -11,6 +11,6 @@ telegraf:
   enabled: false
 
 overload:
-  enabled: true
+  enabled: false
   token_file: "token.txt"
   job_name: test

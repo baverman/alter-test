@@ -1,7 +1,9 @@
 /data.*
 __pycache__
 /.pytest_cache/
+/.coverage
 /*.http
+*.log
 
 /bench/bench.db
 /bench/urls.txt

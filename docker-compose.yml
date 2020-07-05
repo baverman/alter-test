@@ -1,0 +1,10 @@
+version: '3'
+services:
+  bank:
+    build: .
+    command: uwsgi --ini etc/uwsgi.ini -L
+    restart: unless-stopped
+    network_mode: host
+    user: ${USERID:-root}
+    volumes:
+      - .:/app

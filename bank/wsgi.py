@@ -1,7 +1,12 @@
+import logging.handlers
 from covador import item, frange
-from http import Application, query_string, json_response
 
-import accounts
+from bank.http import Application, query_string, json_response
+from bank import accounts
+
+logging.basicConfig()
+
+# Init tables if db is empty
 accounts.create_tables()
 
 app = application = Application()
@@ -18,10 +23,12 @@ def account_info(request, account):
 
 
 @app.api('/api/create-account')
-@query_string(account=int, amount=float)
+@query_string(account=int, amount=frange(min=0))
 def create_account(request, account, amount):
-    accounts.create_account(account, amount)
-    return {'result': 'ok'}
+    if accounts.create_account(account, amount):
+        return {'result': 'ok'}
+    else:
+        return json_response({'error': 'account-exists'}, 409)
 
 
 @app.api('/api/transfer/')
@@ -29,6 +36,9 @@ def create_account(request, account, amount):
               acc2=item(int, src='to'),
               amount=frange(min=0))
 def transfer(request, acc1, acc2, amount):
+    if acc1 == acc2:
+        return json_response({'error': 'same-accounts'}, 400)
+
     transfered, balance = accounts.transfer(acc1, acc2, amount)
     if transfered:
         return {'result': balance}

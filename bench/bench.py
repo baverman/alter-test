@@ -1,16 +1,15 @@
 import time
 import random
 
-import config
-config.DB_PATH = './bench.db'
+from bank import config
+config.DB_PATH = './bench/bench.db'
 
-import accounts
+from bank import accounts
 
 accounts.create_tables(drop=True)
-accounts.create_account(1, 0)
-accounts.create_account(2, 0)
+accounts.create_account(1, 10)
+accounts.create_account(2, 10)
 
 
 def do_transaction():
-    amount = random.randint(-100, 100)
-    accounts.move_money(1, 2, amount)
+    accounts.transfer(1, 2, 0)

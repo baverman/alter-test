@@ -1,0 +1,8 @@
+[run]
+source = bank
+
+
+[report]
+omit =
+    bank/http.py
+    bank/wsgi.py
