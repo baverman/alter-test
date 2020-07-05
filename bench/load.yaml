@@ -1,0 +1,16 @@
+phantom:
+  address: 127.0.0.1:8000
+  load_profile:
+    load_type: rps
+    schedule: line(300, 2000, 120s)
+
+console:
+  enabled: true
+
+telegraf:
+  enabled: false
+
+overload:
+  enabled: true
+  token_file: "token.txt"
+  job_name: test

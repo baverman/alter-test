@@ -1,0 +1,10 @@
+/data.*
+__pycache__
+/.pytest_cache/
+/*.http
+
+/bench/bench.db
+/bench/urls.txt
+/bench/logs
+/bench/ammo.*
+/bench/token.txt
